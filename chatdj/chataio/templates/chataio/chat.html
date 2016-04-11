@@ -1,0 +1,35 @@
+<div id="chat" class="chat"></div>
+
+<script id="tplMsgBox" type="text/template">
+	<div class="chat-msgbox-title"><%= name %></div>
+	<div class="chat-msgbox-messages"></div>
+	<form>
+		<textarea></textarea>
+		<input type="submit" value="Send">
+	</form>
+</script>
+
+
+
+<script id="tplUserBox" type="text/template">
+	<div class="chat-usersbox-users"></div>
+	<button class="js-get-user-list">Get user list</button>
+	<button class="js-get-online-user-list">Get online user list</button>
+</script>
+
+<script id="tplMsgBoxMsg" type="text/template">
+	<div class="chat-msgbox-message <%= className %>">
+		<div class="chat-msgbox-message-user"><%= user ? user : 'You' %></div>
+		<div class="chat-msgbox-message-content"><%= message %></div>
+	</div>
+	<div style="clear:both"></div>
+</script>
+
+<script type="text/javascript">
+	window.chatConf = {
+		socket: 'ws://' + location.host + '/chat/api/'
+		, userId: {{ user.id }}
+	}
+</script>
+
+<script src="{% static 'chataio/js/chat.js' %}" type="text/javascript"></script>

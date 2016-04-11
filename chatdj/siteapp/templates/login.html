@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+
+{% block tabtitle %}
+	Sing in | Chat
+{% endblock %}
+
+{% block pagetitle %}
+	Sing in
+{% endblock %}
+
+
+{% block content %}
+
+	<div class="row">
+		<form action="" method="post" class="col-md-4">
+			{% csrf_token %}
+
+			<div class="form-group {% if form.username.errors %} has-error {% endif %}">
+				<label class="control-label" for="{{ form.username.id_for_label }}">Username:</label>
+				{{ form.username }}
+
+				{% for error in form.username.errors %}
+					<p class="help-block">{{ error|escape }}</p>
+				{% endfor %}
+			</div>
+
+			<div class="form-group {% if form.password.errors %} has-error {% endif %}">
+				<label class="control-label" for="{{ form.password.id_for_label }}">Password:</label>
+				{{ form.password }}
+
+				{% for error in form.password.errors %}
+					<p class="help-block">{{ error|escape }}</p>
+				{% endfor %}
+			</div>
+
+			{% if not form.is_valid %}
+				<div class="form-group has-error">
+					{% for error in form.non_field_errors %}
+						<p class="help-block">{{ error|escape }}</p>
+					{% endfor %}
+				</div>
+			{% endif %}
+			
+			<input type="hidden" name="next" value="{{ next|escape }}" />
+
+			<div class="form-group">
+				<input type="submit" value="Sign In" class="btn btn-primary" />
+			</div>
+		</form>
+
+	</div>
+
+{% endblock %}
